@@ -1,0 +1,45 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install Neutron
+    apt:
+      name:
+        - neutron-server
+        - neutron-plugin-ml2
+        - neutron-dhcp-agent
+        - neutron-l3-agent
+        - neutron-linuxbridge-agent
+        - python3-neutronclient
+      state: latest
+
+  - name: Start Neutron
+    service:
+      name: neutron-server
+      state: started
+      enabled: true
+
+  - name: Install Horizon
+    apt:
+      name: openstack-dashboard
+      state: latest
+
+  - name: Start Horizon
+    service:
+      name: apache2
+      state: started
+      enabled: true
+
+  - name: Install Cinder
+    apt:
+      name:
+        - cinder-volume
+        - python3-mysqldb
+      state: latest
+
+  - name: Start Cinder
+    service:
+      name: cinder-volume
+      state: started
+      enabled: true

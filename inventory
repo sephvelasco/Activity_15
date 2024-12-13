@@ -1,0 +1,9 @@
+[web_server]
+server1
+
+[db_server]
+server1
+
+[file_server]
+server1
+
